@@ -9,5 +9,5 @@ export const environment = {
     appId: '1:418564109814:web:1e414b577fbd7199da43d7',
     measurementId: 'G-E6RHQWMLYY',
   },
-  apiUrl: 'http://localhost:5000/api',
+  apiUrl: 'https://petpal-plaza-backend.vercel.app/api',
 };
