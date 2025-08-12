@@ -1,0 +1,13 @@
+<div class="details-container">
+  <h2>Pet Details</h2>
+  <p>ID: {{ id }}</p>
+  @if (pet) {
+  <p>Name: {{ pet.name }} ({{ pet.species }})</p>
+  <p>Age: {{ pet.age }}</p>
+  <p>Description: {{ pet.description }}</p>
+  <p>Owner ID: {{ pet.ownerId }}</p>
+  <p>Likes: {{ pet.likes.length }}</p>
+  <p>Comments: {{ pet.comments.length }}</p>
+  }
+  <a routerLink="/catalog">Back to Catalog</a>
+</div>
