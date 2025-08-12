@@ -38,18 +38,7 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputPath": "dist/petpal-plaza/browser",
-              "namedChunks": false,
-              "extractLicenses": true,
-              "sourceMap": false
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
