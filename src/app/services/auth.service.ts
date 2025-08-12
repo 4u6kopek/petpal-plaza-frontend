@@ -13,15 +13,24 @@ export class AuthService {
     this.auth.onAuthStateChanged((user) => {
       console.log('Auth state changed:', user);
       this.isLoggedInSubject.next(!!user);
+      if (user) {
+        user.getIdToken().then((token) => {
+          localStorage.setItem('firebase-token', token);
+        });
+      } else {
+        localStorage.removeItem('firebase-token');
+      }
     });
   }
 
   login(email: string, password: string): Observable<void> {
     return new Observable((observer) => {
       signInWithEmailAndPassword(this.auth, email, password)
-        .then(() => {
-          console.log('Login successful');
-          observer.complete();
+        .then((credential) => {
+          credential.user.getIdToken().then((token) => {
+            localStorage.setItem('firebase-token', token);
+            observer.complete();
+          });
         })
         .catch((err) => {
           console.error('Login failed:', err);
@@ -34,6 +43,7 @@ export class AuthService {
     signOut(this.auth)
       .then(() => {
         console.log('Logout successful');
+        localStorage.removeItem('firebase-token');
         this.isLoggedInSubject.next(false);
       })
       .catch((err) => console.error('Logout failed:', err));
