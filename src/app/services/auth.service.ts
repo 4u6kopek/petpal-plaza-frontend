@@ -11,6 +11,7 @@ export class AuthService {
 
   constructor(private auth: Auth) {
     this.auth.onAuthStateChanged((user) => {
+      console.log('Auth state changed:', user);
       this.isLoggedInSubject.next(!!user);
     });
   }
@@ -18,16 +19,23 @@ export class AuthService {
   login(email: string, password: string): Observable<void> {
     return new Observable((observer) => {
       signInWithEmailAndPassword(this.auth, email, password)
-        .then(() => observer.complete())
-        .catch((err) => observer.error(err));
+        .then(() => {
+          console.log('Login successful');
+          observer.complete();
+        })
+        .catch((err) => {
+          console.error('Login failed:', err);
+          observer.error(err);
+        });
     });
   }
 
   logout(): void {
     signOut(this.auth)
       .then(() => {
+        console.log('Logout successful');
         this.isLoggedInSubject.next(false);
       })
-      .catch((err) => console.error('Logout failed', err));
+      .catch((err) => console.error('Logout failed:', err));
   }
 }
