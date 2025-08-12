@@ -1,0 +1,11 @@
+<div class="home-container">
+  <h1>Welcome to PetPal Plaza!</h1>
+  <p>Adopt your new best friend today.</p>
+  <a routerLink="/catalog">View Catalog</a> | @if (!(authService.isLoggedIn |
+  async)) {
+  <a routerLink="/login">Login</a>
+  } @if (authService.isLoggedIn | async) {
+  <button (click)="logout()">Logout</button>
+  <a routerLink="/profile">Profile</a>
+  }
+</div>
