@@ -7,4 +7,5 @@ export interface Pet {
   ownerId: string;
   likes: string[];
   comments: Comment[];
+  imageUrl?: string;
 }
