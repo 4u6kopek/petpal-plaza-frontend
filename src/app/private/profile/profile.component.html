@@ -1,17 +1,31 @@
 <div class="profile-container">
-  <h2>Your Profile</h2>
-  <button (click)="logout()" class="logout-btn">Logout</button>
-  <h3>Your Pets</h3>
-  @if (userPets.length) {
-  <ul>
-    @for (pet of userPets; track pet._id) {
-    <li>
-      {{ pet.name }} ({{ pet.species }}) -
-      <a [routerLink]="['/details', pet._id]">Details</a>
-    </li>
+  <div class="profile-card">
+    <h2>Your Profile</h2>
+    <button (click)="logout()" class="logout-btn">Logout</button>
+    <h3>Your Pets</h3>
+    @if (userPets.length) {
+    <ul class="pet-list">
+      @for (pet of userPets; track pet._id) {
+      <li class="pet-item">
+        <img
+          [src]="pet.imageUrl || '/assets/images/fallback-pet.png'"
+          alt="{{ pet.name }}"
+          class="pet-image"
+        />
+        <div class="pet-info">
+          <span>{{ pet.name }} ({{ pet.species }})</span>
+          <a [routerLink]="['/details', pet._id]" class="details-link"
+            >Details</a
+          >
+        </div>
+      </li>
+      }
+    </ul>
+    } @else {
+    <p class="no-pets">
+      You have no pets yet.
+      <a routerLink="/create" class="create-link">Create one!</a>
+    </p>
     }
-  </ul>
-  } @else {
-  <p>You have no pets yet. <a routerLink="/create">Create one!</a></p>
-  }
+  </div>
 </div>
