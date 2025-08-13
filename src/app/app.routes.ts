@@ -7,6 +7,7 @@ import { ProfileComponent } from './private/profile/profile.component';
 import { CreateComponent } from './private/create-pet/create.component';
 import { RegisterComponent } from './public/register/register.component';
 import { EditComponent } from './private/edit-pet/edit.component';
+import { AboutComponent } from './public/about/about.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
   { path: 'catalog', component: CatalogComponent },
   { path: 'details/:id', component: DetailsComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: 'profile',
     component: ProfileComponent,
