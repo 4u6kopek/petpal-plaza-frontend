@@ -13,6 +13,7 @@ import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 export class RegisterComponent {
   email: string = '';
   password: string = '';
+  username: string = '';
   error: string | null = null;
 
   constructor(
@@ -23,24 +24,26 @@ export class RegisterComponent {
 
   register() {
     this.error = null;
-    this.authService.register(this.email, this.password).subscribe({
-      next: () => {
-        const returnUrl =
-          this.route.snapshot.queryParams['returnUrl'] || '/home';
-        this.router.navigate([returnUrl], { replaceUrl: true });
-      },
-      error: (err) => {
-        if (err.code === 'auth/email-already-in-use') {
-          this.error = 'This email is already registered.';
-        } else if (err.code === 'auth/invalid-email') {
-          this.error = 'Invalid email format.';
-        } else if (err.code === 'auth/weak-password') {
-          this.error = 'Password is too weak. Use at least 6 characters.';
-        } else {
-          this.error = 'Registration failed. Please try again.';
-        }
-        console.error('Registration failed:', err);
-      },
-    });
+    this.authService
+      .register(this.email, this.password, this.username)
+      .subscribe({
+        next: () => {
+          const returnUrl =
+            this.route.snapshot.queryParams['returnUrl'] || '/home';
+          this.router.navigate([returnUrl], { replaceUrl: true });
+        },
+        error: (err) => {
+          if (err.code === 'auth/email-already-in-use') {
+            this.error = 'This email is already registered.';
+          } else if (err.code === 'auth/invalid-email') {
+            this.error = 'Invalid email format.';
+          } else if (err.code === 'auth/weak-password') {
+            this.error = 'Password is too weak. Use at least 6 characters.';
+          } else {
+            this.error = 'Registration failed. Please try again.';
+          }
+          console.error('Registration failed:', err);
+        },
+      });
   }
 }
