@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background: #e3f6db;
+}
+
+app-root {
+  display: block;
+  min-height: 100vh;
+}

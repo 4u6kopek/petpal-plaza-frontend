@@ -1,0 +1,17 @@
+app-nav {
+  position: relative;
+  z-index: 10;
+}
+
+main {
+  position: relative;
+  z-index: 5;
+  min-height: calc(100vh - 120px);
+}
+
+app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+}
