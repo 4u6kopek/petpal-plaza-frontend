@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
-import { Pet } from '../../models/pet.interface';
 import { AuthService } from '../../services/auth.service';
+import { Pet } from '../../models/pet.interface';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css'],
 })
@@ -45,7 +45,7 @@ export class CreateComponent {
       !this.pet.description.trim()
     ) {
       this.error =
-        'All fields must be filled with valid data. Name, species, and description cannot be empty or just spaces.';
+        'All fields except Image URL must be filled with valid data. Name, species, and description cannot be empty or just spaces.';
       return;
     }
 
