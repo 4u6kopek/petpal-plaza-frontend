@@ -4,11 +4,12 @@ import { Pet } from '../../models/pet.interface';
 import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { AgePipe } from '../../pipes/age.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, RouterLink, AgePipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

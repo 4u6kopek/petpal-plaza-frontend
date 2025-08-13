@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Pet } from '../../models/pet.interface';
 import { AuthService } from '../../services/auth.service';
+import { AgePipe } from '../../pipes/age.pipe';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AgePipe],
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
 })

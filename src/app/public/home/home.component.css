@@ -32,7 +32,7 @@ h1 {
 }
 
 .tagline {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #4caf50;
   line-height: 1.5;
   text-align: center;
@@ -90,6 +90,12 @@ p {
   margin: 0;
   font-size: 1.1rem;
   color: #333;
+}
+
+.pet-info p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .details-btn {

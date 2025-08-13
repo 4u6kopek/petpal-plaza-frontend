@@ -3,11 +3,12 @@ import { ApiService } from '../../services/api.service';
 import { Pet } from '../../models/pet.interface';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { AgePipe } from '../../pipes/age.pipe';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AgePipe],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })

@@ -16,7 +16,7 @@
           class="pet-image"
         />
         <div class="pet-info">
-          <span>{{ pet.name }} ({{ pet.species }})</span>
+          <span>{{ pet.name }} ({{ pet.species }}) - {{ pet.age | age }}</span>
           <a [routerLink]="['/details', pet._id]" class="details-link"
             >Details</a
           >

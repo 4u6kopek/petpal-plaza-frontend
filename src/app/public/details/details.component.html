@@ -12,7 +12,7 @@
     </div>
     <div class="pet-info">
       <h3>{{ pet.name }} ({{ pet.species }})</h3>
-      <p><strong>Age:</strong> {{ pet.age }}</p>
+      <p><strong>Age:</strong> {{ pet.age | age }}</p>
       <p><strong>Description:</strong> {{ pet.description }}</p>
       <p><strong>Likes:</strong> {{ pet.likes.length }}</p>
       <p><strong>Comments:</strong> {{ pet.comments.length }}</p>

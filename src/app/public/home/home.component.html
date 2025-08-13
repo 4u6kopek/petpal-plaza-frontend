@@ -17,6 +17,7 @@
       />
       <div class="pet-info">
         <h3>{{ pet.name }} ({{ pet.species }})</h3>
+        <p>{{ pet.age | age }}</p>
         <a [routerLink]="['/details', pet._id]" class="details-btn">Details</a>
       </div>
     </div>

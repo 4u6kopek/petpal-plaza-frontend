@@ -117,6 +117,10 @@ h3 {
   font-size: 1rem;
 }
 
+.pet-info span {
+  color: #666;
+}
+
 .details-link {
   color: #4caf50;
   text-decoration: none;
