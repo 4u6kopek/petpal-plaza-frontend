@@ -1,13 +1,13 @@
 .register-container {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Roboto", sans-serif;
   position: relative;
   z-index: 1;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 
 .register-container::before {
@@ -102,14 +102,20 @@ input.ng-invalid.ng-touched {
   cursor: not-allowed;
 }
 
-.login-link {
-  display: block;
-  text-align: center;
+.login-btn {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
   margin-top: 1rem;
-  color: #4caf50;
-  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
-.login-link:hover {
-  text-decoration: underline;
+.login-btn:hover {
+  background-color: #e64a19;
 }
