@@ -1,10 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Pet } from '../../models/pet.interface';
+import { AuthService } from '../../services/auth.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
-  template: '<p>Welcome to your profile!</p>',
+  imports: [RouterLink],
+  templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {}
+export class ProfileComponent implements OnInit {
+  userPets: Pet[] = [];
+  constructor(
+    public authService: AuthService,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    const ownerId = 'user123';
+    this.apiService.getPets().subscribe({
+      next: (pets) =>
+        (this.userPets = pets.filter((pet) => pet.ownerId === ownerId)),
+      error: (err) => console.error('Error fetching user pets', err),
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/home']);
+  }
+}

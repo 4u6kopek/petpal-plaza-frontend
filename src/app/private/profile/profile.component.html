@@ -1,0 +1,17 @@
+<div class="profile-container">
+  <h2>Your Profile</h2>
+  <button (click)="logout()" class="logout-btn">Logout</button>
+  <h3>Your Pets</h3>
+  @if (userPets.length) {
+  <ul>
+    @for (pet of userPets; track pet._id) {
+    <li>
+      {{ pet.name }} ({{ pet.species }}) -
+      <a [routerLink]="['/details', pet._id]">Details</a>
+    </li>
+    }
+  </ul>
+  } @else {
+  <p>You have no pets yet. <a routerLink="/create">Create one!</a></p>
+  }
+</div>
