@@ -6,6 +6,7 @@ import { DetailsComponent } from './public/details/details.component';
 import { ProfileComponent } from './private/profile/profile.component';
 import { CreateComponent } from './private/create-pet/create.component';
 import { RegisterComponent } from './public/register/register.component';
+import { EditComponent } from './private/edit-pet/edit.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
 
@@ -29,6 +30,11 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [guestGuard],
+  },
+  {
+    path: 'edit/:id',
+    component: EditComponent,
+    canActivate: [authGuard],
   },
   { path: '**', redirectTo: 'home' },
 ];
