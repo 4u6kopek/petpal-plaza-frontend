@@ -60,11 +60,3 @@ An **Angular SPA** where pet lovers create profiles, browse pets, and connect. F
 - Unit testing
 
 ---
-
-## 💻 **Local Setup**
-
-```bash
-git clone https://github.com/4u6kopek/petpal-plaza-frontend.git
-cd petpal-plaza-frontend && npm install
-ng serve
-```
