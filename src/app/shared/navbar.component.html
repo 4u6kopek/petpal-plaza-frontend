@@ -1,0 +1,16 @@
+<nav class="navbar">
+  <div class="logo">PetPal Plaza</div>
+  <ul class="nav-links">
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/catalog" routerLinkActive="active">Catalog</a></li>
+    @if (authService.isLoggedIn | async) {
+    <li><a routerLink="/create" routerLinkActive="active">Create Pet</a></li>
+    <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+    <li>
+      <button (click)="authService.logout()" class="logout-btn">Logout</button>
+    </li>
+    } @else {
+    <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    }
+  </ul>
+</nav>
