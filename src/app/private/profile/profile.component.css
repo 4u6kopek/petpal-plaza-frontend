@@ -1,4 +1,35 @@
-p {
-  text-align: center;
-  padding: 20px;
+.profile-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+h2 {
+  color: #4caf50;
+  font-size: 2rem;
+}
+h3 {
+  color: #333;
+  margin-top: 1.5rem;
+}
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background-color: #d32f2f;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
 }
