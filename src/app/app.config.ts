@@ -5,6 +5,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
+import { AgePipe } from './pipes/age.pipe';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideHttpClient(),
+    { provide: AgePipe, useClass: AgePipe },
   ],
 };
