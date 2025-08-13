@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import {
+  Auth,
+  signInWithEmailAndPassword,
+  signOut,
+  User,
+} from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,17 +13,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn = this.isLoggedInSubject.asObservable();
+  private userIdSubject = new BehaviorSubject<string | null>(null);
+  userId$ = this.userIdSubject.asObservable();
 
   constructor(private auth: Auth) {
-    this.auth.onAuthStateChanged((user) => {
+    this.auth.onAuthStateChanged((user: User | null) => {
       console.log('Auth state changed:', user);
       this.isLoggedInSubject.next(!!user);
       if (user) {
         user.getIdToken().then((token) => {
           localStorage.setItem('firebase-token', token);
         });
+        this.userIdSubject.next(user.uid);
       } else {
         localStorage.removeItem('firebase-token');
+        this.userIdSubject.next(null);
       }
     });
   }
@@ -45,7 +54,12 @@ export class AuthService {
         console.log('Logout successful');
         localStorage.removeItem('firebase-token');
         this.isLoggedInSubject.next(false);
+        this.userIdSubject.next(null);
       })
       .catch((err) => console.error('Logout failed:', err));
+  }
+
+  getUserId(): string | null {
+    return this.userIdSubject.value;
   }
 }
