@@ -1,0 +1,30 @@
+<div class="register-container">
+  <h2>Register</h2>
+  @if (error) {
+  <p class="error">{{ error }}</p>
+  }
+  <form (ngSubmit)="register()" class="register-form">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      />
+    </div>
+    <button type="submit" class="submit-btn">Register</button>
+    <a routerLink="/login" class="cancel-btn">Back to Login</a>
+  </form>
+</div>
