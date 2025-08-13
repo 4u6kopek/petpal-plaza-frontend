@@ -71,12 +71,18 @@ export class ApiService {
     });
   }
 
-  addLike(id: string, userId: string): Observable<Pet> {
+  addLike(id: string): Observable<Pet> {
     return this.http.post<Pet>(
       `${this.apiUrl}/pets/${id}/likes`,
-      { userId },
+      {},
       { headers: this.getHeaders() }
     );
+  }
+
+  removeLike(id: string): Observable<Pet> {
+    return this.http.delete<Pet>(`${this.apiUrl}/pets/${id}/likes`, {
+      headers: this.getHeaders(),
+    });
   }
 
   addComment(id: string, comment: any): Observable<Pet> {
