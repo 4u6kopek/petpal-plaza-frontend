@@ -20,6 +20,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/"
               }
             ],
             "styles": ["src/styles.css"]
@@ -72,6 +76,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/"
               }
             ],
             "styles": ["src/styles.css"]
