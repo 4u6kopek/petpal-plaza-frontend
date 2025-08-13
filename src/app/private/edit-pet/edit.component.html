@@ -1,42 +1,68 @@
 <div class="edit-container">
-  <h2>Edit Pet</h2>
-  @if (error) {
-  <p class="error">{{ error }}</p>
-  }
-  <form (ngSubmit)="onSubmit()" class="edit-form">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input id="name" [(ngModel)]="pet.name" name="name" required />
-    </div>
-    <div class="form-group">
-      <label for="species">Species:</label>
-      <input id="species" [(ngModel)]="pet.species" name="species" required />
-    </div>
-    <div class="form-group">
-      <label for="age">Age:</label>
-      <input
-        id="age"
-        type="number"
-        [(ngModel)]="pet.age"
-        name="age"
-        min="1"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea
-        id="description"
-        [(ngModel)]="pet.description"
-        name="description"
-        required
-      ></textarea>
-    </div>
-    <div class="form-group">
-      <label for="imageUrl">Image URL:</label>
-      <input id="imageUrl" [(ngModel)]="pet.imageUrl" name="imageUrl" />
-    </div>
-    <button type="submit" class="submit-btn">Update Pet</button>
-    <a routerLink="/catalog" class="cancel-btn">Cancel</a>
-  </form>
+  <div class="edit-card">
+    <h2>Edit Pet</h2>
+    @if (error) {
+    <p class="error">{{ error }}</p>
+    }
+    <form #editForm="ngForm" (ngSubmit)="onSubmit()" class="edit-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          [(ngModel)]="pet.name"
+          name="name"
+          type="text"
+          placeholder="Enter pet name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="species">Species:</label>
+        <input
+          id="species"
+          [(ngModel)]="pet.species"
+          name="species"
+          type="text"
+          placeholder="Enter species"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input
+          id="age"
+          [(ngModel)]="pet.age"
+          name="age"
+          type="number"
+          min="1"
+          placeholder="Enter age"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="pet.description"
+          name="description"
+          placeholder="Enter description"
+          required
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image URL (Optional):</label>
+        <input
+          id="imageUrl"
+          [(ngModel)]="pet.imageUrl"
+          name="imageUrl"
+          type="text"
+          placeholder="Enter image URL"
+        />
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="editForm.invalid">
+        Update Pet
+      </button>
+      <a routerLink="/catalog" class="cancel-btn">Cancel</a>
+    </form>
+  </div>
 </div>

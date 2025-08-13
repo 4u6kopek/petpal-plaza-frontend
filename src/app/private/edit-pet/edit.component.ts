@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterModule,
+  RouterLink,
+} from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { Pet } from '../../models/pet.interface';
 import { AuthService } from '../../services/auth.service';
@@ -8,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterModule, RouterLink],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })
@@ -59,7 +64,8 @@ export class EditComponent implements OnInit {
       !this.pet.description ||
       !this.pet.description.trim()
     ) {
-      this.error = 'All fields must be filled with valid data.';
+      this.error =
+        'All fields except Image URL must be filled with valid data.';
       return;
     }
 
