@@ -6,6 +6,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { AgePipe } from './pipes/age.pipe';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideHttpClient(),
+    provideAnimations(),
     { provide: AgePipe, useClass: AgePipe },
   ],
 };

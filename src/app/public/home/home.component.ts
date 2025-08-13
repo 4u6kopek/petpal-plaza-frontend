@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { AgePipe } from '../../pipes/age.pipe';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,17 @@ import { AgePipe } from '../../pipes/age.pipe';
   imports: [AsyncPipe, RouterLink, AgePipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate(
+          '500ms ease-in',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
   recentPets: Pet[] = [];

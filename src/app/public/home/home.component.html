@@ -8,7 +8,7 @@
   @if (recentPets.length) {
   <div class="pet-grid">
     @for (pet of recentPets; track pet._id) {
-    <div class="pet-card">
+    <div class="pet-card" @fadeIn>
       <img
         [src]="pet.imageUrl"
         alt="{{ pet.name }}"
