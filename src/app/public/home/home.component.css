@@ -31,6 +31,14 @@ h1 {
   text-align: center;
 }
 
+.tagline {
+  font-size: 1.3rem;
+  color: #4caf50;
+  line-height: 1.5;
+  text-align: center;
+  margin: 1rem 0;
+}
+
 h2 {
   color: #333;
   margin-top: 1.5rem;
