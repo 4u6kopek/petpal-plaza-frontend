@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { Pet } from '../../models/pet.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create',
@@ -20,12 +21,17 @@ export class CreateComponent {
     ownerId: '',
     likes: [],
     comments: [],
+    imageUrl: '',
   };
   error: string | null = null;
 
-  constructor(private apiService: ApiService, private router: Router) {
-    const token = localStorage.getItem('firebase-token');
-    this.pet.ownerId = token ? 'user123' : '';
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    const userId = this.authService.getUserId();
+    this.pet.ownerId = userId || '';
   }
 
   onSubmit() {
