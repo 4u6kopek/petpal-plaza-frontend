@@ -65,6 +65,12 @@
   color: #333;
 }
 
+.pet-info p {
+  margin: 0.5rem 0;
+  color: #333;
+  font-size: 1rem;
+}
+
 .details-btn {
   display: inline-block;
   background-color: #4caf50;

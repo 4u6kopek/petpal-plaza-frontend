@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { RouterLink } from '@angular/router';
 import { Pet } from '../../models/pet.interface';
+import { AgePipe } from '../../pipes/age.pipe';
 
 @Component({
   selector: 'app-catalog',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, AgePipe],
   templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.css',
+  styleUrls: ['./catalog.component.css'],
 })
 export class CatalogComponent implements OnInit {
   pets: Pet[] = [];

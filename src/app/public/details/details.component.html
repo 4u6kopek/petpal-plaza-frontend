@@ -14,7 +14,21 @@
       <h3>{{ pet.name }} ({{ pet.species }})</h3>
       <p><strong>Age:</strong> {{ pet.age | age }}</p>
       <p><strong>Description:</strong> {{ pet.description }}</p>
-      <p><strong>Likes:</strong> {{ pet.likes.length }}</p>
+      <div class="like-section">
+        @if (authService.isLoggedIn | async) {
+        <button
+          (click)="toggleLike()"
+          [ngClass]="{ liked: isLiked }"
+          class="like-btn"
+        >
+          {{ isLiked ? "Unlike" : "Like" }}
+        </button>
+        }
+        <p>
+          <strong>Likes:</strong> {{ pet.likes.length }}
+          {{ pet.likes.length === 1 ? "Like" : "Likes" }}
+        </p>
+      </div>
       <p><strong>Comments:</strong> {{ pet.comments.length }}</p>
       <p class="owner-info">
         <span class="profile-picture">{{ getInitials(ownerUsername) }}</span>

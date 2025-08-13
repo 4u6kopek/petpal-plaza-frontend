@@ -4,11 +4,12 @@ import { ApiService } from '../../services/api.service';
 import { Pet } from '../../models/pet.interface';
 import { AuthService } from '../../services/auth.service';
 import { AgePipe } from '../../pipes/age.pipe';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [RouterLink, AgePipe],
+  imports: [RouterLink, AgePipe, CommonModule],
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
 })
@@ -16,6 +17,7 @@ export class DetailsComponent implements OnInit {
   id: string = '';
   pet: Pet | undefined;
   ownerUsername: string | null = null;
+  isLiked: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -33,6 +35,9 @@ export class DetailsComponent implements OnInit {
             ...pet,
             imageUrl: pet.imageUrl || '/assets/images/fallback-pet.png',
           };
+          this.isLiked = this.authService.getUserId()
+            ? pet.likes.includes(this.authService.getUserId()!)
+            : false;
           this.apiService.getUserDisplayName(pet.ownerId).subscribe({
             next: (username) => (this.ownerUsername = username),
             error: (err) => {
@@ -42,6 +47,27 @@ export class DetailsComponent implements OnInit {
           });
         },
         error: (err) => console.error('Error fetching pet details', err),
+      });
+    }
+  }
+
+  toggleLike() {
+    if (!this.pet || !this.authService.getUserId()) return;
+    if (this.isLiked) {
+      this.apiService.removeLike(this.pet._id!).subscribe({
+        next: (updatedPet) => {
+          this.pet = updatedPet;
+          this.isLiked = false;
+        },
+        error: (err) => console.error('Error removing like', err),
+      });
+    } else {
+      this.apiService.addLike(this.pet._id!).subscribe({
+        next: (updatedPet) => {
+          this.pet = updatedPet;
+          this.isLiked = true;
+        },
+        error: (err) => console.error('Error adding like', err),
       });
     }
   }

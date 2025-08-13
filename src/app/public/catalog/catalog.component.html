@@ -13,6 +13,11 @@
       </div>
       <div class="pet-info">
         <h3>{{ pet.name }} ({{ pet.species }})</h3>
+        <p><strong>Age:</strong> {{ pet.age | age }}</p>
+        <p>
+          <strong>Likes:</strong> {{ pet.likes.length }}
+          {{ pet.likes.length === 1 ? "Like" : "Likes" }}
+        </p>
         <a [routerLink]="['/details', pet._id]" class="details-btn">Details</a>
       </div>
     </div>
