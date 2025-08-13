@@ -29,7 +29,11 @@ export class HomeComponent implements OnInit {
             const likesDiff = b.likes.length - a.likes.length;
             return likesDiff !== 0 ? likesDiff : a.name.localeCompare(b.name);
           })
-          .slice(0, 5);
+          .slice(0, 5)
+          .map((pet) => ({
+            ...pet,
+            imageUrl: pet.imageUrl || '/assets/images/fallback-pet.png',
+          }));
       },
       error: (err) => console.error('Error fetching pets', err),
     });
@@ -38,5 +42,10 @@ export class HomeComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/home']);
+  }
+
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = '/assets/images/fallback-pet.png';
   }
 }
