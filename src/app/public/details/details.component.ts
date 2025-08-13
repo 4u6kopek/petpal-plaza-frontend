@@ -26,7 +26,12 @@ export class DetailsComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id') || '';
     if (this.id) {
       this.apiService.getPet(this.id).subscribe({
-        next: (pet) => (this.pet = pet),
+        next: (pet) => {
+          this.pet = {
+            ...pet,
+            imageUrl: pet.imageUrl || '/assets/images/fallback-pet.png',
+          };
+        },
         error: (err) => console.error('Error fetching pet details', err),
       });
     }
@@ -39,5 +44,10 @@ export class DetailsComponent implements OnInit {
         error: (err) => console.error('Error deleting pet', err),
       });
     }
+  }
+
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = '/assets/images/fallback-pet.png';
   }
 }
