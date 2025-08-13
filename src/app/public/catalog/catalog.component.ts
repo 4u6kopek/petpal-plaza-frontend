@@ -17,8 +17,18 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getPets().subscribe({
-      next: (pets) => (this.pets = pets),
+      next: (pets) => {
+        this.pets = pets.map((pet) => ({
+          ...pet,
+          imageUrl: pet.imageUrl || '/assets/images/fallback-pet.png',
+        }));
+      },
       error: (err) => console.error('Error fetching pets', err),
     });
+  }
+
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = '/assets/images/fallback-pet.png';
   }
 }

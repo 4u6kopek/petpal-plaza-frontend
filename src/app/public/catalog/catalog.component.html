@@ -1,13 +1,23 @@
 <div class="catalog-container">
   @if (pets.length) {
-  <ul>
+  <div class="pet-grid">
     @for (pet of pets; track pet._id) {
-    <li>
-      {{ pet.name }} ({{ pet.species }}) -
-      <a [routerLink]="['/details', pet._id]">Details</a>
-    </li>
+    <div class="pet-card">
+      <div class="image-container">
+        <img
+          [src]="pet.imageUrl"
+          alt="{{ pet.name }}"
+          class="pet-image"
+          (error)="handleImageError($event)"
+        />
+      </div>
+      <div class="pet-info">
+        <h3>{{ pet.name }} ({{ pet.species }})</h3>
+        <a [routerLink]="['/details', pet._id]" class="details-btn">Details</a>
+      </div>
+    </div>
     }
-  </ul>
+  </div>
   } @else {
   <p>No pets available</p>
   }
