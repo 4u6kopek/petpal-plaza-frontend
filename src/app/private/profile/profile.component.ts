@@ -20,12 +20,14 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const ownerId = 'user123';
-    this.apiService.getPets().subscribe({
-      next: (pets) =>
-        (this.userPets = pets.filter((pet) => pet.ownerId === ownerId)),
-      error: (err) => console.error('Error fetching user pets', err),
-    });
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.apiService.getPets().subscribe({
+        next: (pets) =>
+          (this.userPets = pets.filter((pet) => pet.ownerId === userId)),
+        error: (err) => console.error('Error fetching user pets', err),
+      });
+    }
   }
 
   logout() {
