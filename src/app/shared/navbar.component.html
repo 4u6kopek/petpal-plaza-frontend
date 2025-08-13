@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <div class="logo">PetPal Plaza</div>
+  <button routerLink="/home" class="logo-btn">PetPal Plaza</button>
   <ul class="nav-links">
     <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
     <li><a routerLink="/catalog" routerLinkActive="active">Catalog</a></li>
@@ -11,6 +11,7 @@
     </li>
     } @else {
     <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
     }
   </ul>
 </nav>
