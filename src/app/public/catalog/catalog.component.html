@@ -1,15 +1,14 @@
 <div class="catalog-container">
-  <h2>Pet Catalog</h2>
+  @if (pets.length) {
   <ul>
     @for (pet of pets; track pet._id) {
     <li>
-      <h3>{{ pet.name }} ({{ pet.species }})</h3>
-      <p>Age: {{ pet.age }}</p>
-      <p>{{ pet.description }}</p>
-      <a [routerLink]="'/details/' + pet._id">Details</a>
+      {{ pet.name }} ({{ pet.species }}) -
+      <a [routerLink]="['/details', pet._id]">Details</a>
     </li>
-    } @empty {
-    <p>No pets available.</p>
     }
   </ul>
+  } @else {
+  <p>No pets available</p>
+  }
 </div>
