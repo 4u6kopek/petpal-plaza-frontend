@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class DetailsComponent implements OnInit {
   id: string = '';
   pet: Pet | undefined;
+  ownerUsername: string | null = null;
 
   constructor(
     public authService: AuthService,
@@ -31,6 +32,13 @@ export class DetailsComponent implements OnInit {
             ...pet,
             imageUrl: pet.imageUrl || '/assets/images/fallback-pet.png',
           };
+          this.apiService.getUserDisplayName(pet.ownerId).subscribe({
+            next: (username) => (this.ownerUsername = username),
+            error: (err) => {
+              console.error('Error fetching owner username', err);
+              this.ownerUsername = 'Unknown User';
+            },
+          });
         },
         error: (err) => console.error('Error fetching pet details', err),
       });
@@ -49,5 +57,13 @@ export class DetailsComponent implements OnInit {
   handleImageError(event: Event) {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = '/assets/images/fallback-pet.png';
+  }
+
+  getInitials(username: string | null): string {
+    if (!username) return '??';
+    const names = username.trim().split(/\s+/);
+    return names.length > 1
+      ? `${names[0][0]}${names[1][0]}`.toUpperCase()
+      : names[0][0].toUpperCase();
   }
 }

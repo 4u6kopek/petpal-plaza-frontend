@@ -1,6 +1,9 @@
 <div class="profile-container">
   <div class="profile-card">
-    <h2>Your Profile</h2>
+    <div class="profile-header">
+      <div class="profile-picture">{{ getInitials(username) }}</div>
+      <h2>{{ username || "Your Profile" }}</h2>
+    </div>
     <button (click)="logout()" class="logout-btn">Logout</button>
     <h3>Your Pets</h3>
     @if (userPets.length) {

@@ -16,7 +16,10 @@
       <p><strong>Description:</strong> {{ pet.description }}</p>
       <p><strong>Likes:</strong> {{ pet.likes.length }}</p>
       <p><strong>Comments:</strong> {{ pet.comments.length }}</p>
-      <p><strong>Owner ID:</strong> {{ pet.ownerId }}</p>
+      <p class="owner-info">
+        <span class="profile-picture">{{ getInitials(ownerUsername) }}</span>
+        <strong>Owner:</strong> {{ ownerUsername || "Unknown User" }}
+      </p>
       @if (pet.ownerId === authService.getUserId()) {
       <div class="button-group">
         <button (click)="deletePet()" class="delete-btn">Delete Pet</button>
