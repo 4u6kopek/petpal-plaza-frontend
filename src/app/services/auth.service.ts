@@ -5,6 +5,7 @@ import {
   signOut,
   User,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from '@angular/fire/auth';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -58,14 +59,25 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string): Observable<void> {
+  register(
+    email: string,
+    password: string,
+    username: string
+  ): Observable<void> {
     return new Observable((observer) => {
       createUserWithEmailAndPassword(this.auth, email, password)
         .then((credential) => {
-          credential.user.getIdToken().then((token) => {
-            localStorage.setItem('firebase-token', token);
-            observer.complete();
-          });
+          updateProfile(credential.user, { displayName: username })
+            .then(() => {
+              credential.user.getIdToken().then((token) => {
+                localStorage.setItem('firebase-token', token);
+                observer.complete();
+              });
+            })
+            .catch((err) => {
+              console.error('Update profile failed:', err);
+              observer.error(err);
+            });
         })
         .catch((err) => {
           console.error('Registration failed:', err);
@@ -87,5 +99,9 @@ export class AuthService {
 
   getUserId(): string | null {
     return this.userIdSubject.value;
+  }
+
+  getUsername(): string | null {
+    return this.auth.currentUser?.displayName || null;
   }
 }

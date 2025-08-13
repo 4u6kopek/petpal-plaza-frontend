@@ -41,6 +41,18 @@ export class ApiService {
     );
   }
 
+  getUserDisplayName(uid: string): Observable<string> {
+    return this.http
+      .get<{ displayName: string }>(`${this.apiUrl}/users/${uid}`)
+      .pipe(
+        map((response) => response.displayName),
+        catchError((error) => {
+          console.error('Error fetching user displayName', error);
+          throw error;
+        })
+      );
+  }
+
   createPet(pet: Pet): Observable<Pet> {
     return this.http.post<Pet>(`${this.apiUrl}/pets`, pet, {
       headers: this.getHeaders(),
