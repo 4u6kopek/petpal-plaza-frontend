@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,19 +15,32 @@ export class RegisterComponent {
   password: string = '';
   error: string | null = null;
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   register() {
-    createUserWithEmailAndPassword(this.auth, this.email, this.password)
-      .then((credential) => {
-        credential.user.getIdToken().then((token) => {
-          localStorage.setItem('firebase-token', token);
-          this.router.navigate(['/home']);
-        });
-      })
-      .catch((err) => {
-        this.error = 'Registration failed. Please try again.';
-        console.error('Registration failed', err);
-      });
+    this.error = null;
+    this.authService.register(this.email, this.password).subscribe({
+      next: () => {
+        const returnUrl =
+          this.route.snapshot.queryParams['returnUrl'] || '/home';
+        this.router.navigate([returnUrl], { replaceUrl: true });
+      },
+      error: (err) => {
+        if (err.code === 'auth/email-already-in-use') {
+          this.error = 'This email is already registered.';
+        } else if (err.code === 'auth/invalid-email') {
+          this.error = 'Invalid email format.';
+        } else if (err.code === 'auth/weak-password') {
+          this.error = 'Password is too weak. Use at least 6 characters.';
+        } else {
+          this.error = 'Registration failed. Please try again.';
+        }
+        console.error('Registration failed:', err);
+      },
+    });
   }
 }
