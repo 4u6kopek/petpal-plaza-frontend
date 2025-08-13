@@ -1,4 +1,56 @@
 .home-container {
-  text-align: center;
-  padding: 20px;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+h1 {
+  color: #4caf50;
+  font-size: 2.5rem;
+}
+h2 {
+  color: #333;
+  margin-top: 1.5rem;
+}
+p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+.view-all-btn,
+.login-btn,
+.profile-btn {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin-top: 1rem;
+  border-radius: 4px;
+}
+.view-all-btn:hover,
+.login-btn:hover,
+.profile-btn:hover {
+  background-color: #45a049;
+}
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  background-color: #d32f2f;
 }

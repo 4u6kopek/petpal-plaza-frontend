@@ -13,13 +13,17 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  error: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
       next: () => this.router.navigate(['/home']),
-      error: (err) => console.error('Login failed', err),
+      error: (err) => {
+        this.error = 'Login failed. Please check your credentials.';
+        console.error('Login failed', err);
+      },
     });
   }
 }

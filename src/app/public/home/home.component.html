@@ -1,11 +1,27 @@
 <div class="home-container">
   <h1>Welcome to PetPal Plaza!</h1>
-  <p>Adopt your new best friend today.</p>
-  <a routerLink="/catalog">View Catalog</a> | @if (!(authService.isLoggedIn |
-  async)) {
-  <a routerLink="/login">Login</a>
+  <p>
+    Discover your perfect pet companion with us. Explore our catalog of adorable
+    pets and find your new best friend.
+  </p>
+  <h2>Top 5 Recent Pets</h2>
+  @if (recentPets.length) {
+  <ul>
+    @for (pet of recentPets; track pet._id) {
+    <li>
+      {{ pet.name }} ({{ pet.species }}) -
+      <a [routerLink]="['/details', pet._id]">Details</a>
+    </li>
+    }
+  </ul>
+  } @else {
+  <p>No recent pets available.</p>
+  }
+  <a routerLink="/catalog" class="view-all-btn">View All Pets</a>
+  @if (!(authService.isLoggedIn | async)) {
+  <a routerLink="/login" class="login-btn">Login</a>
   } @if (authService.isLoggedIn | async) {
-  <button (click)="logout()">Logout</button>
-  <a routerLink="/profile">Profile</a>
+  <button (click)="logout()" class="logout-btn">Logout</button>
+  <a routerLink="/profile" class="profile-btn">Profile</a>
   }
 </div>

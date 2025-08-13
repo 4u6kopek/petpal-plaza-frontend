@@ -1,17 +1,39 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { Pet } from '../../models/pet.interface';
+import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  constructor(public authService: AuthService, private router: Router) {}
+export class HomeComponent implements OnInit {
+  recentPets: Pet[] = [];
+
+  constructor(
+    public authService: AuthService,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.apiService.getPets().subscribe({
+      next: (pets) => {
+        this.recentPets = [...pets]
+          .sort((a, b) => {
+            const likesDiff = b.likes.length - a.likes.length;
+            return likesDiff !== 0 ? likesDiff : a.name.localeCompare(b.name);
+          })
+          .slice(0, 5);
+      },
+      error: (err) => console.error('Error fetching pets', err),
+    });
+  }
 
   logout() {
     this.authService.logout();
