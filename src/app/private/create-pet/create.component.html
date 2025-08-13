@@ -1,0 +1,26 @@
+<div class="create-container">
+  <h2>Create a New Pet</h2>
+  @if (error) {
+  <p class="error">{{ error }}</p>
+  }
+  <form (ngSubmit)="onSubmit()" class="create-form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="pet.name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label for="species">Species:</label>
+      <input id="species" [(ngModel)]="pet.species" name="species" required />
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input id="age" type="number" [(ngModel)]="pet.age" name="age" min="1" required />
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="pet.description" name="description" required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Create Pet</button>
+    <a routerLink="/catalog" class="cancel-btn">Cancel</a>
+  </form>
+</div>
