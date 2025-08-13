@@ -1,13 +1,20 @@
 <div class="details-container">
   <h2>Pet Details</h2>
-  <p>ID: {{ id }}</p>
   @if (pet) {
+  <p>ID: {{ id }}</p>
   <p>Name: {{ pet.name }} ({{ pet.species }})</p>
   <p>Age: {{ pet.age }}</p>
   <p>Description: {{ pet.description }}</p>
   <p>Owner ID: {{ pet.ownerId }}</p>
   <p>Likes: {{ pet.likes.length }}</p>
   <p>Comments: {{ pet.comments.length }}</p>
+  @if (pet.imageUrl) {
+  <img src="{{ pet.imageUrl }}" alt="{{ pet.name }}" class="pet-image" />
+  } @if (pet.ownerId === authService.getUserId()) {
+  <button (click)="deletePet()" class="delete-btn">Delete Pet</button>
+  <a [routerLink]="['/edit', id]" class="edit-btn">Edit Pet</a>
+  } } @else {
+  <p>Pet not found.</p>
   }
-  <a routerLink="/catalog">Back to Catalog</a>
+  <a routerLink="/catalog" class="back-btn">Back to Catalog</a>
 </div>

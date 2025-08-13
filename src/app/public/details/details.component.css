@@ -1,6 +1,51 @@
 .details-container {
   max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+h2 {
+  color: #4caf50;
+  font-size: 2rem;
+}
+p {
+  margin: 0.5rem 0;
+  color: #333;
+}
+.pet-image {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+.delete-btn,
+.edit-btn,
+.back-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+.edit-btn {
+  background-color: #ffeb3b;
+  color: #333;
+}
+.edit-btn:hover {
+  background-color: #fdd835;
+}
+.back-btn {
+  background-color: #ccc;
+  color: #333;
+}
+.back-btn:hover {
+  background-color: #bbb;
 }
